@@ -490,7 +490,7 @@ spec:
                           elif oxr.spec.compositionSelector.matchLabels.provider == "aws":
                               spec.provider.aws = {
                                   service = "SecretsManager"
-                                  region = "us-east-1"
+                                  region = "eu-west-3"
                                   auth.secretRef = {
                                       accessKeyIDSecretRef = {
                                           name = oxr.spec.parameters.creds.name
@@ -1105,7 +1105,7 @@ spec:
                           elif oxr.spec.compositionSelector.matchLabels.provider == "aws":
                               spec.provider.aws = {
                                   service = "SecretsManager"
-                                  region = "us-east-1"
+                                  region = "eu-west-3"
                                   auth.secretRef = {
                                       accessKeyIDSecretRef = {
                                           name = oxr.spec.parameters.creds.name
@@ -1290,7 +1290,7 @@ spec:
               kind = "Cluster"
               metadata = _metadata("", "ekscluster", "")
               spec.forProvider: {
-                  region = "us-east-1"
+                  region = "eu-west-3"
                   bootstrapSelfManagedAddons = True
                   if oxr.spec.parameters.version:
                       version = oxr.spec.parameters.version
@@ -1312,7 +1312,7 @@ spec:
               metadata = _metadata("", "clusterAuth", "")
               spec = {
                   forProvider: {
-                      region = "us-east-1"
+                      region = "eu-west-3"
                       clusterNameSelector.matchControllerRef = True
                   }
                   writeConnectionSecretToRef = {
@@ -1326,7 +1326,7 @@ spec:
               metadata = _metadata("", "eksnodegroup", "")
               spec = {
                   forProvider = {
-                      region = "us-east-1"
+                      region = "eu-west-3"
                       clusterNameSelector.matchControllerRef = True
                       nodeRoleArnSelector = {
                           matchControllerRef = True
@@ -1354,7 +1354,7 @@ spec:
               metadata = _metadata("", "vpc-nodepool", "")
               spec = {
                   forProvider = {
-                      region = "us-east-1"
+                      region = "eu-west-3"
                       cidrBlock = "10.0.0.0/16"
                       enableDnsSupport = True
                   }
@@ -1366,7 +1366,7 @@ spec:
               spec.forProvider: {
                   name = oxr.spec.id
                   description = "Cluster communication with worker nodes"
-                  region = "us-east-1"
+                  region = "eu-west-3"
                   vpcIdSelector.matchControllerRef = True
               }
           }, {
@@ -1375,7 +1375,7 @@ spec:
               metadata = _metadata("", "securityGroupRule", "")
               spec.forProvider: {
                   description = "I am too lazy to write descriptions"
-                  region = "us-east-1"
+                  region = "eu-west-3"
                   type = "egress"
                   fromPort = 0
                   toPort = 0
@@ -1388,7 +1388,7 @@ spec:
               kind = "InternetGateway"
               metadata = _metadata("", "gateway", "")
               spec.forProvider = {
-                  region = "us-east-1"
+                  region = "eu-west-3"
                   vpcIdSelector.matchControllerRef = True
               }
           }, {
@@ -1396,7 +1396,7 @@ spec:
               kind = "RouteTable"
               metadata = _metadata("", "routeTable", "")
               spec.forProvider: {
-                  region = "us-east-1"
+                  region = "eu-west-3"
                   vpcIdSelector.matchControllerRef = True
               }
           }, {
@@ -1404,7 +1404,7 @@ spec:
               kind: "Route"
               metadata = _metadata("", "route", "")
               spec.forProvider: {
-                  region = "us-east-1"
+                  region = "eu-west-3"
                   routeTableIdSelector.matchControllerRef = True
                   destinationCidrBlock = "0.0.0.0/0"
                   gatewayIdSelector.matchControllerRef = True
@@ -1414,7 +1414,7 @@ spec:
               kind: "MainRouteTableAssociation"
               metadata = _metadata("", "mainRouteTableAssociation", "")
               spec.forProvider: {
-                  region = "us-east-1"
+                  region = "eu-west-3"
                   routeTableIdSelector.matchControllerRef = True
                   vpcIdSelector.matchControllerRef = True
               }
@@ -1424,7 +1424,7 @@ spec:
               metadata = _metadata("ebs", "addonEbs", "")
               spec.forProvider = {
                   addonName = "aws-ebs-csi-driver"
-                  region = "us-east-1"
+                  region = "eu-west-3"
                   clusterNameSelector.matchControllerRef = True
               }
           }, {
@@ -1447,7 +1447,7 @@ spec:
               kind = "RouteTableAssociation"
               metadata = _metadata(_zone.suffix, "routeTableAssociation" + _zone.suffix, "")
               spec.forProvider: {
-                  region = "us-east-1"
+                  region = "eu-west-3"
                   routeTableIdSelector.matchControllerRef = True
                   subnetIdSelector = {
                       matchControllerRef = True
@@ -1474,7 +1474,7 @@ spec:
               }
               spec: {
                   forProvider = {
-                      region = "us-east-1"
+                      region = "eu-west-3"
                       availabilityZone = "us-east-" + _zone.suffix
                       cidrBlock = _zone.ip
                       vpcIdSelector.matchControllerRef = True
@@ -1933,7 +1933,7 @@ spec:
                           elif oxr.spec.compositionSelector.matchLabels.provider == "aws":
                               spec.provider.aws = {
                                   service = "SecretsManager"
-                                  region = "us-east-1"
+                                  region = "eu-west-3"
                                   auth.secretRef = {
                                       accessKeyIDSecretRef = {
                                           name = oxr.spec.parameters.creds.name
