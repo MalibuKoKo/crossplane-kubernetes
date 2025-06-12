@@ -217,7 +217,7 @@ spec:
                   subnetIdSelector = {
                       matchControllerRef = True
                       matchLabels = {
-                          zone = "us-east-" + _zone.suffix
+                          zone = "eu-west-" + _zone.suffix
                           access = "public"
                       }
                   }
@@ -234,14 +234,14 @@ spec:
                       "krm.kcl.dev/composition-resource-name" = "subnet-nodepool-" + _zone.suffix
                   }
                   labels = {
-                      zone = "us-east-" + _zone.suffix
+                      zone = "eu-west-" + _zone.suffix
                       access: "public"
                   }
               }
               spec: {
                   forProvider = {
                       region = "eu-west-3"
-                      availabilityZone = "us-east-" + _zone.suffix
+                      availabilityZone = "eu-west-" + _zone.suffix
                       cidrBlock = _zone.ip
                       vpcIdSelector.matchControllerRef = True
                       mapPublicIpOnLaunch = True
