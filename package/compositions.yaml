@@ -39,7 +39,7 @@ spec:
               spec = {
                   forProvider = {
                       deletionProtection = False
-                      location = "us-east1"
+                      location = "eu-west-3"
                       minMasterVersion = oxr.spec.parameters.version
                       initialNodeCount = 1
                       removeDefaultNodePool = True
@@ -60,7 +60,7 @@ spec:
               spec.forProvider = {
                   version = oxr.spec.parameters.version
                   initialNodeCount = oxr.spec.parameters.minNodeCount
-                  nodeLocations = ["us-east1-b", "us-east1-c", "us-east1-d"]
+                  nodeLocations = ["eu-west-3-a", "eu-west-3-b", "eu-west-3-c"]
                   clusterSelector.matchControllerRef = True
                   nodeConfig = {
                       if oxr.spec.parameters.nodeSize == "small":
