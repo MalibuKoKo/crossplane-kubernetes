@@ -37,6 +37,19 @@ spec:
       version:
         title: General version
         type: string
+      region:
+        title: General region
+        type: string
+        default: eu-west-3
+      zones:
+        title: General zones
+        type: array
+        default:
+        - eu-west-3a
+        - eu-west-3b
+        - eu-west-3c
+        items:
+          type: string
       nodeSize:
         title: General nodeSize
         type: string

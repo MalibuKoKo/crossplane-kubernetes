@@ -22,7 +22,7 @@ _items = [{
     kind = "Cluster"
     metadata = _metadata("", "ekscluster", "")
     spec.forProvider: {
-        region = "us-east-1"
+        region = oxr.spec.region
         bootstrapSelfManagedAddons = True
         if oxr.spec.parameters.version:
             version = oxr.spec.parameters.version
@@ -44,7 +44,7 @@ _items = [{
     metadata = _metadata("", "clusterAuth", "")
     spec = {
         forProvider: {
-            region = "us-east-1"
+            region = oxr.spec.region
             clusterNameSelector.matchControllerRef = True
         }
         writeConnectionSecretToRef = {
@@ -58,7 +58,7 @@ _items = [{
     metadata = _metadata("", "eksnodegroup", "")
     spec = {
         forProvider = {
-            region = "us-east-1"
+            region = oxr.spec.region
             clusterNameSelector.matchControllerRef = True
             nodeRoleArnSelector = {
                 matchControllerRef = True
@@ -86,7 +86,7 @@ _items = [{
     metadata = _metadata("", "vpc-nodepool", "")
     spec = {
         forProvider = {
-            region = "us-east-1"
+            region = oxr.spec.region
             cidrBlock = "10.0.0.0/16"
             enableDnsSupport = True
         }
@@ -98,7 +98,7 @@ _items = [{
     spec.forProvider: {
         name = oxr.spec.id
         description = "Cluster communication with worker nodes"
-        region = "us-east-1"
+        region = oxr.spec.region
         vpcIdSelector.matchControllerRef = True
     }
 }, {
@@ -107,7 +107,7 @@ _items = [{
     metadata = _metadata("", "securityGroupRule", "")
     spec.forProvider: {
         description = "I am too lazy to write descriptions"
-        region = "us-east-1"
+        region = oxr.spec.region
         type = "egress"
         fromPort = 0
         toPort = 0
@@ -120,7 +120,7 @@ _items = [{
     kind = "InternetGateway"
     metadata = _metadata("", "gateway", "")
     spec.forProvider = {
-        region = "us-east-1"
+        region = oxr.spec.region
         vpcIdSelector.matchControllerRef = True
     }
 }, {
@@ -128,7 +128,7 @@ _items = [{
     kind = "RouteTable"
     metadata = _metadata("", "routeTable", "")
     spec.forProvider: {
-        region = "us-east-1"
+        region = oxr.spec.region
         vpcIdSelector.matchControllerRef = True
     }
 }, {
@@ -136,7 +136,7 @@ _items = [{
     kind: "Route"
     metadata = _metadata("", "route", "")
     spec.forProvider: {
-        region = "us-east-1"
+        region = oxr.spec.region
         routeTableIdSelector.matchControllerRef = True
         destinationCidrBlock = "0.0.0.0/0"
         gatewayIdSelector.matchControllerRef = True
@@ -146,7 +146,7 @@ _items = [{
     kind: "MainRouteTableAssociation"
     metadata = _metadata("", "mainRouteTableAssociation", "")
     spec.forProvider: {
-        region = "us-east-1"
+        region = oxr.spec.region
         routeTableIdSelector.matchControllerRef = True
         vpcIdSelector.matchControllerRef = True
     }
@@ -156,7 +156,7 @@ _items = [{
     metadata = _metadata("ebs", "addonEbs", "")
     spec.forProvider = {
         addonName = "aws-ebs-csi-driver"
-        region = "us-east-1"
+        region = oxr.spec.region
         clusterNameSelector.matchControllerRef = True
     }
 }, {
@@ -169,22 +169,22 @@ _items = [{
 }]
 
 _zones = [
-    {suffix = "1a", ip = "10.0.0.0/24"}
-    {suffix = "1b", ip = "10.0.1.0/24"},
-    {suffix = "1c", ip = "10.0.2.0/24"}
+    {name = oxr.spec.zones[0], ip = "10.0.0.0/24"}
+    {name = oxr.spec.zones[1], ip = "10.0.1.0/24"},
+    {name = oxr.spec.zones[2], ip = "10.0.2.0/24"}
 ]
 
 _items += [{
     apiVersion = "ec2.aws.upbound.io/v1beta1"
     kind = "RouteTableAssociation"
-    metadata = _metadata(_zone.suffix, "routeTableAssociation" + _zone.suffix, "")
+    metadata = _metadata(_zone.name, "routeTableAssociation" + _zone.name, "")
     spec.forProvider: {
-        region = "us-east-1"
+        region = oxr.spec.region
         routeTableIdSelector.matchControllerRef = True
         subnetIdSelector = {
             matchControllerRef = True
             matchLabels = {
-                zone = "us-east-" + _zone.suffix
+                zone = _zone.name
                 access = "public"
             }
         }
@@ -195,19 +195,19 @@ _items += [{
     apiVersion = "ec2.aws.upbound.io/v1beta1"
     kind = "Subnet"
     metadata = {
-        name = oxr.spec.id + "-" + _zone.suffix
+        name = oxr.spec.id + "-" + _zone.name
         annotations = {
-            "krm.kcl.dev/composition-resource-name" = "subnet-nodepool-" + _zone.suffix
+            "krm.kcl.dev/composition-resource-name" = "subnet-nodepool-" + _zone.name
         }
         labels = {
-            zone = "us-east-" + _zone.suffix
+            zone = _zone.name
             access: "public"
         }
     }
     spec: {
         forProvider = {
-            region = "us-east-1"
-            availabilityZone = "us-east-" + _zone.suffix
+            region = oxr.spec.region
+            availabilityZone = _zone.name
             cidrBlock = _zone.ip
             vpcIdSelector.matchControllerRef = True
             mapPublicIpOnLaunch = True

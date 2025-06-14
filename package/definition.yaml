@@ -38,6 +38,19 @@ spec:
                   version:
                     description: The Kubernetes version for the cluster.
                     type: string
+                  region:
+                    description: The region
+                    type: string
+                    default: eu-west-3
+                  zones:
+                    description: List of zones
+                    type: array
+                    default:
+                    - eu-west-3a
+                    - eu-west-3b
+                    - eu-west-3c
+                    items:
+                      type: string
                   nodeSize:
                     description: The size of the nodes; small, medium, large.
                     type: string

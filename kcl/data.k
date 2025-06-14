@@ -6,6 +6,17 @@ root = {
             description = "The Kubernetes version for the cluster."
             type = "string"
         }
+        region = {
+            description = "The region"
+            type = "string"
+            default = "eu-west-3"
+        }
+        zones = {
+            description = "List of zones"
+            type = "array"
+            itemsType = "string"
+            defaultArray = "eu-west-3a,eu-west-3b,eu-west-3c"
+        }
         nodeSize = {
             description = "The size of the nodes; small, medium, large."
             type = "string"
