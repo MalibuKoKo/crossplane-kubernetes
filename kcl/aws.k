@@ -38,6 +38,7 @@ _items = [{
             subnetIdSelector.matchControllerRef = True
         }]
     }
+    spec.providerConfigRef.name = oxr.spec.id
 }, {
     apiVersion = "eks.aws.upbound.io/v1beta1"
     kind = "ClusterAuth"
@@ -51,6 +52,7 @@ _items = [{
             name = oxr.spec.id + "-cluster"
             namespace = oxr.spec.claimRef.namespace
         }
+        providerConfigRef.name = oxr.spec.id
     }
 }, {
     apiVersion = "eks.aws.upbound.io/v1beta1"
@@ -79,6 +81,7 @@ _items = [{
             else:
                 instanceTypes = ["t3.large"]
         }
+        providerConfigRef.name = oxr.spec.id
     }
 }, {
     apiVersion = "ec2.aws.upbound.io/v1beta1"
@@ -90,6 +93,7 @@ _items = [{
             cidrBlock = "10.0.0.0/16"
             enableDnsSupport = True
         }
+        providerConfigRef.name = oxr.spec.id
     }
 }, {
     apiVersion: "ec2.aws.upbound.io/v1beta1"
@@ -101,6 +105,7 @@ _items = [{
         region = oxr.spec.parameters.region
         vpcIdSelector.matchControllerRef = True
     }
+    spec.providerConfigRef.name = oxr.spec.id
 }, {
     apiVersion = "ec2.aws.upbound.io/v1beta1"
     kind = "SecurityGroupRule"
@@ -115,6 +120,7 @@ _items = [{
         cidrBlocks = ["0.0.0.0/0"]
         securityGroupIdSelector.matchControllerRef = True
     }
+    spec.providerConfigRef.name = oxr.spec.id
 }, {
     apiVersion = "ec2.aws.upbound.io/v1beta1"
     kind = "InternetGateway"
@@ -123,6 +129,7 @@ _items = [{
         region = oxr.spec.parameters.region
         vpcIdSelector.matchControllerRef = True
     }
+    spec.providerConfigRef.name = oxr.spec.id
 }, {
     apiVersion = "ec2.aws.upbound.io/v1beta1"
     kind = "RouteTable"
@@ -131,6 +138,7 @@ _items = [{
         region = oxr.spec.parameters.region
         vpcIdSelector.matchControllerRef = True
     }
+    spec.providerConfigRef.name = oxr.spec.id
 }, {
     apiVersion: "ec2.aws.upbound.io/v1beta1"
     kind: "Route"
@@ -141,6 +149,7 @@ _items = [{
         destinationCidrBlock = "0.0.0.0/0"
         gatewayIdSelector.matchControllerRef = True
     }
+    spec.providerConfigRef.name = oxr.spec.id
 }, {
     apiVersion: "ec2.aws.upbound.io/v1beta1"
     kind: "MainRouteTableAssociation"
@@ -150,6 +159,7 @@ _items = [{
         routeTableIdSelector.matchControllerRef = True
         vpcIdSelector.matchControllerRef = True
     }
+    spec.providerConfigRef.name = oxr.spec.id
 }, {
     apiVersion = "eks.aws.upbound.io/v1beta1"
     kind = "Addon"
@@ -159,6 +169,7 @@ _items = [{
         region = oxr.spec.parameters.region
         clusterNameSelector.matchControllerRef = True
     }
+    spec.providerConfigRef.name = oxr.spec.id
 }, {
     **oxr
     status.clusterName = oxr.spec.id
@@ -189,6 +200,7 @@ _items += [{
             }
         }
     }
+    spec.providerConfigRef.name = oxr.spec.id
 } for _zone in _zones]
 
 _items += [{
@@ -215,6 +227,7 @@ _items += [{
                 "kubernetes.io/role/elb": "1"
             }
         }
+        providerConfigRef.name = oxr.spec.id
     }
 } for _zone in _zones]
 
@@ -238,6 +251,7 @@ _items += [{
                 matchLabels.role = oxr.spec.id + "-" + _rpa.role
             }
         }
+        providerConfigRef.name = oxr.spec.id
     }
 } for _rpa in _rpas]
 
@@ -256,6 +270,7 @@ _items += [{
         }
         labels.role = oxr.spec.id + "-" + _role.name
     }
+    spec.providerConfigRef.name = oxr.spec.id
     spec.forProvider.assumeRolePolicy = """\
 {
   "Version": "2012-10-17",
