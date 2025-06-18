@@ -200,6 +200,21 @@ spec:
                     - keys
                 required:
                 - nodeSize
+              providerConfigRef:
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
+                type: object
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                  policy:
+                    description: Policies for referencing.
+                    type: object
+                required:
+                - name
             required:
             - id
             - parameters

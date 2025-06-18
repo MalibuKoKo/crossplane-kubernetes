@@ -207,3 +207,41 @@ creds = {
     }
     required = ["name", "namespace", "keys"]
 }
+
+providerConfigRef = {
+    type = "object"
+    description = "ProviderConfigReference specifies how the provider that will be used to\ncreate, observe, update, and delete this managed resource should be\nconfigured."
+    default = {
+        name = "default"
+    }
+    properties = {
+        name = {
+            type = "string"
+            description = "Name of the referenced object."
+        }
+        policy = {
+            description = "Policies for referencing."
+            properties = {
+                resolution = {
+                    default = "Required"
+                    description = "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved."
+                    enum = [
+                      "Required"
+                      "Optional"
+                    ]
+                    type = "string"
+                }
+                resolve = {
+                    description = "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile."
+                    enum = [
+                      "Always"
+                      "IfNotPresent"
+                    ]
+                    type = "string"
+                }
+            }
+            type = "object"
+        }
+    }
+    required = ["name"]
+}

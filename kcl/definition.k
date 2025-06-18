@@ -80,6 +80,7 @@ spec = {
 
                             }
                             parameters.properties.creds = _data(data.creds)
+                            providerConfigRef = _data(data.providerConfigRef)
                         }
                         required = ["id", "parameters"]
                     }
