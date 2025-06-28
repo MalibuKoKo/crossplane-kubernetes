@@ -60,7 +60,7 @@ root = {
                             }
                         }
                         required = ["name", "cidr"]
-                        additionalProperties = false
+                        additionalProperties = False
                     }
                 }
             }
