@@ -53,6 +53,46 @@ spec = {
                             }
                             parameters = _data(data.root)
                             parameters.properties.usage = _data(data.usage)
+                            parameters.properties.vpcConfig = {
+                                description = "VPC Config."
+                                type = "object"
+                                properties = {
+                                    region = {
+                                        description = "The region"
+                                        type = "object"
+                                        properties = {
+                                            name = {
+                                                description = "The name of the region"
+                                                type = "string"
+                                            }
+                                            cidr = {
+                                                description = "The cidr used for this region"
+                                                type = "string"
+                                            }
+                                        }
+                                        required = ["name", "cidr"]
+                                    }
+                                    zones = {
+                                        description = "The availability zones"
+                                        type = "array"
+                                        items = {
+                                            type = "object"
+                                            properties = {
+                                                name = {
+                                                    description = "The name of the zone"
+                                                    type = "string"
+                                                }
+                                                cidr = {
+                                                    description = "The cidr used for this zone"
+                                                    type = "string"
+                                                }
+                                            }
+                                            required = ["name", "cidr"]
+                                        }
+                                    }
+                                }
+                                required = ["region","zones"]
+                            }
                             parameters.properties.apps = {
                                 type = "object"
                                 description = "List of apps that should be installed in the cluster"

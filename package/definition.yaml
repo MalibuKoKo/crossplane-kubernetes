@@ -38,9 +38,6 @@ spec:
                   version:
                     description: The Kubernetes version for the cluster.
                     type: string
-                  vpcConfig:
-                    description: VPC Config.
-                    type: object
                   nodeSize:
                     description: The size of the nodes; small, medium, large.
                     type: string
@@ -65,6 +62,41 @@ spec:
                         type: boolean
                         default: false
                     required: []
+                  vpcConfig:
+                    description: VPC Config.
+                    type: object
+                    properties:
+                      region:
+                        description: The region
+                        type: object
+                        properties:
+                          name:
+                            description: The name of the region
+                            type: string
+                          cidr:
+                            description: The cidr used for this region
+                            type: string
+                        required:
+                        - name
+                        - cidr
+                      zones:
+                        description: The availability zones
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              description: The name of the zone
+                              type: string
+                            cidr:
+                              description: The cidr used for this zone
+                              type: string
+                          required:
+                          - name
+                          - cidr
+                    required:
+                    - region
+                    - zones
                   apps:
                     type: object
                     description: List of apps that should be installed in the cluster

@@ -37,9 +37,6 @@ spec:
       version:
         title: General version
         type: string
-      vpcConfig:
-        title: General vpcConfig
-        type: object
       nodeSize:
         title: General nodeSize
         type: string

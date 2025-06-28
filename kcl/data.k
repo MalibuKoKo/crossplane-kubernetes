@@ -1,3 +1,44 @@
+vpcConfig = {
+    description = "VPC Config."
+    type = "object"
+    properties = {
+        region = {
+            description = "The region"
+            type = "object"
+            properties = {
+                name = {
+                    description = "The name of the region"
+                    type = "string"
+                }
+                cidr = {
+                    description = "The cidr used for this region"
+                    type = "string"
+                }
+            }
+            required = ["name", "cidr"]
+        }
+        zones = {
+            description = "The availability zones"
+            type = "array"
+            items = {
+                type = "object"
+                properties = {
+                    name = {
+                        description = "The name of the zone"
+                        type = "string"
+                    }
+                    cidr = {
+                        description = "The cidr used for this zone"
+                        type = "string"
+                    }
+                }
+                required = ["name", "cidr"]
+            }
+        }
+    }
+    required = ["region","zones"]
+}
+
 root = {
     type = "object"
     description = "Parameters used to customize the cluster"
@@ -5,66 +46,6 @@ root = {
         version = {
             description = "The Kubernetes version for the cluster."
             type = "string"
-        }
-        vpcConfig = {
-            type = "object"
-            description = "VPC Config."
-            # default = {
-            #     region = {
-            #         name = "eu-west-3"
-            #         cidr = "10.0.0.0/16"
-            #     }
-            #     zones = [
-            #         {
-            #             name = "eu-west-3a"
-            #             cidr = "10.0.0.0/24"
-            #         },
-            #         {
-            #             name = "eu-west-3b"
-            #             cidr = "10.0.1.0/24"
-            #         },
-            #         {
-            #             name = "eu-west-3c"
-            #             cidr = "10.0.2.0/24"
-            #         }
-            #     ]
-            # }
-            properties = {
-                region = {
-                    description = "The region"
-                    type = "object"
-                    properties = {
-                        name = {
-                            description = "The name of the region"
-                            type = "string"
-                        }
-                        cidr = {
-                            description = "The cidr used for this region"
-                            type = "string"
-                        }
-                    }
-                }
-                zones = {
-                    description = "The availability zones"
-                    type = "array"
-                    items = {
-                        type = "object"
-                        properties = {
-                            name = {
-                                description = "The name of the zone"
-                                type = "string"
-                            }
-                            cidr = {
-                                description = "The cidr used for this zone"
-                                type = "string"
-                            }
-                        }
-                        required = ["name", "cidr"]
-                        additionalProperties = False
-                    }
-                }
-            }
-            required = ["region","zones"]
         }
         nodeSize = {
             description = "The size of the nodes; small, medium, large."
