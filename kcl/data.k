@@ -59,6 +59,8 @@ root = {
                                 type = "string"
                             }
                         }
+                        required = ["name", "cidr"]
+                        additionalProperties = false
                     }
                 }
             }
