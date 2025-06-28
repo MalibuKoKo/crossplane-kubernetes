@@ -9,26 +9,26 @@ root = {
         vpcConfig = {
             type = "object"
             description = "VPC Config."
-            default = {
-                region = {
-                    name = "eu-west-3"
-                    cidr = "10.0.0.0/16"
-                }
-                zones = [
-                    {
-                        name = "eu-west-3a"
-                        cidr = "10.0.0.0/24"
-                    },
-                    {
-                        name = "eu-west-3b"
-                        cidr = "10.0.1.0/24"
-                    },
-                    {
-                        name = "eu-west-3c"
-                        cidr = "10.0.2.0/24"
-                    }
-                ]
-            }
+            # default = {
+            #     region = {
+            #         name = "eu-west-3"
+            #         cidr = "10.0.0.0/16"
+            #     }
+            #     zones = [
+            #         {
+            #             name = "eu-west-3a"
+            #             cidr = "10.0.0.0/24"
+            #         },
+            #         {
+            #             name = "eu-west-3b"
+            #             cidr = "10.0.1.0/24"
+            #         },
+            #         {
+            #             name = "eu-west-3c"
+            #             cidr = "10.0.2.0/24"
+            #         }
+            #     ]
+            # }
             properties = {
                 region = {
                     description = "The region"

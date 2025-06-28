@@ -40,17 +40,6 @@ spec:
       vpcConfig:
         title: General vpcConfig
         type: object
-        default:
-          region:
-            name: eu-west-3
-            cidr: '10.0.0.0/16'
-          zones:
-          - name: eu-west-3a
-            cidr: '10.0.0.0/24'
-          - name: eu-west-3b
-            cidr: '10.0.1.0/24'
-          - name: eu-west-3c
-            cidr: '10.0.2.0/24'
       nodeSize:
         title: General nodeSize
         type: string
