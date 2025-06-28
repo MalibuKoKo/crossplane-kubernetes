@@ -179,11 +179,7 @@ _items = [{
         status.nodePoolStatus = ocds[oxr.spec.id + "-node-group"].Resource.status.conditions[0].reason
 }]
 
-_zones = [
-    {name = oxr.spec.parameters.zones[0], ip = "10.0.0.0/24"}
-    {name = oxr.spec.parameters.zones[1], ip = "10.0.1.0/24"},
-    {name = oxr.spec.parameters.zones[2], ip = "10.0.2.0/24"}
-]
+_zones = oxr.spec.parameters.vpcConfig.zones
 
 _items += [{
     apiVersion = "ec2.aws.upbound.io/v1beta1"
@@ -220,7 +216,7 @@ _items += [{
         forProvider = {
             region = oxr.spec.parameters.region
             availabilityZone = _zone.name
-            cidrBlock = _zone.ip
+            cidrBlock = _zone.cidr
             vpcIdSelector.matchControllerRef = True
             mapPublicIpOnLaunch = True
             tags = {

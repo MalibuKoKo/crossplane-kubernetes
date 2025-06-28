@@ -37,19 +37,20 @@ spec:
       version:
         title: General version
         type: string
-      region:
-        title: General region
-        type: string
-        default: eu-west-3
-      zones:
-        title: General zones
-        type: array
+      vpcConfig:
+        title: General vpcConfig
+        type: object
         default:
-        - eu-west-3a
-        - eu-west-3b
-        - eu-west-3c
-        items:
-          type: string
+          region:
+            name: eu-west-3
+            cidr: '10.0.0.0/16'
+          zones:
+          - name: eu-west-3a
+            cidr: '10.0.0.0/24'
+          - name: eu-west-3b
+            cidr: '10.0.1.0/24'
+          - name: eu-west-3c
+            cidr: '10.0.2.0/24'
       nodeSize:
         title: General nodeSize
         type: string
@@ -72,6 +73,7 @@ spec:
           type: string
     required:
     - nodeSize
+    - vpcConfig
   - title: Apps
     properties:
       crossplane:

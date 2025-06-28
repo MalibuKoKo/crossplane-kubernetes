@@ -38,19 +38,20 @@ spec:
                   version:
                     description: The Kubernetes version for the cluster.
                     type: string
-                  region:
-                    description: The region
-                    type: string
-                    default: eu-west-3
-                  zones:
-                    description: List of zones
-                    type: array
+                  vpcConfig:
+                    description: VPC Config.
+                    type: object
                     default:
-                    - eu-west-3a
-                    - eu-west-3b
-                    - eu-west-3c
-                    items:
-                      type: string
+                      region:
+                        name: eu-west-3
+                        cidr: '10.0.0.0/16'
+                      zones:
+                      - name: eu-west-3a
+                        cidr: '10.0.0.0/24'
+                      - name: eu-west-3b
+                        cidr: '10.0.1.0/24'
+                      - name: eu-west-3c
+                        cidr: '10.0.2.0/24'
                   nodeSize:
                     description: The size of the nodes; small, medium, large.
                     type: string
@@ -200,6 +201,7 @@ spec:
                     - keys
                 required:
                 - nodeSize
+                - vpcConfig
               providerConfigRef:
                 description: |-
                   ProviderConfigReference specifies how the provider that will be used to
