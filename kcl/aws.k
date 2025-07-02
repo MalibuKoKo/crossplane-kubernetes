@@ -22,7 +22,7 @@ _items = [{
     kind = "Cluster"
     metadata = _metadata("", "ekscluster", "")
     spec.forProvider: {
-        region = oxr.spec.parameters.region
+        region = oxr.spec.parameters.vpcConfig.region
         bootstrapSelfManagedAddons = True
         if oxr.spec.parameters.version:
             version = oxr.spec.parameters.version
@@ -45,7 +45,7 @@ _items = [{
     metadata = _metadata("", "clusterAuth", "")
     spec = {
         forProvider: {
-            region = oxr.spec.parameters.region
+            region = oxr.spec.parameters.vpcConfig.region
             clusterNameSelector.matchControllerRef = True
         }
         writeConnectionSecretToRef = {
@@ -60,7 +60,7 @@ _items = [{
     metadata = _metadata("", "eksnodegroup", "")
     spec = {
         forProvider = {
-            region = oxr.spec.parameters.region
+            region = oxr.spec.parameters.vpcConfig.region
             clusterNameSelector.matchControllerRef = True
             nodeRoleArnSelector = {
                 matchControllerRef = True
@@ -89,7 +89,7 @@ _items = [{
     metadata = _metadata("", "vpc-nodepool", "")
     spec = {
         forProvider = {
-            region = oxr.spec.parameters.region
+            region = oxr.spec.parameters.vpcConfig.region
             cidrBlock = "10.0.0.0/16"
             enableDnsSupport = True
         }
@@ -102,7 +102,7 @@ _items = [{
     spec.forProvider: {
         name = oxr.spec.id
         description = "Cluster communication with worker nodes"
-        region = oxr.spec.parameters.region
+        region = oxr.spec.parameters.vpcConfig.region
         vpcIdSelector.matchControllerRef = True
     }
     spec.providerConfigRef = oxr.spec.providerConfigRef
@@ -112,7 +112,7 @@ _items = [{
     metadata = _metadata("", "securityGroupRule", "")
     spec.forProvider: {
         description = "I am too lazy to write descriptions"
-        region = oxr.spec.parameters.region
+        region = oxr.spec.parameters.vpcConfig.region
         type = "egress"
         fromPort = 0
         toPort = 0
@@ -126,7 +126,7 @@ _items = [{
     kind = "InternetGateway"
     metadata = _metadata("", "gateway", "")
     spec.forProvider = {
-        region = oxr.spec.parameters.region
+        region = oxr.spec.parameters.vpcConfig.region
         vpcIdSelector.matchControllerRef = True
     }
     spec.providerConfigRef = oxr.spec.providerConfigRef
@@ -135,7 +135,7 @@ _items = [{
     kind = "RouteTable"
     metadata = _metadata("", "routeTable", "")
     spec.forProvider: {
-        region = oxr.spec.parameters.region
+        region = oxr.spec.parameters.vpcConfig.region
         vpcIdSelector.matchControllerRef = True
     }
     spec.providerConfigRef = oxr.spec.providerConfigRef
@@ -144,7 +144,7 @@ _items = [{
     kind: "Route"
     metadata = _metadata("", "route", "")
     spec.forProvider: {
-        region = oxr.spec.parameters.region
+        region = oxr.spec.parameters.vpcConfig.region
         routeTableIdSelector.matchControllerRef = True
         destinationCidrBlock = "0.0.0.0/0"
         gatewayIdSelector.matchControllerRef = True
@@ -155,7 +155,7 @@ _items = [{
     kind: "MainRouteTableAssociation"
     metadata = _metadata("", "mainRouteTableAssociation", "")
     spec.forProvider: {
-        region = oxr.spec.parameters.region
+        region = oxr.spec.parameters.vpcConfig.region
         routeTableIdSelector.matchControllerRef = True
         vpcIdSelector.matchControllerRef = True
     }
@@ -166,7 +166,7 @@ _items = [{
     metadata = _metadata("ebs", "addonEbs", "")
     spec.forProvider = {
         addonName = "aws-ebs-csi-driver"
-        region = oxr.spec.parameters.region
+        region = oxr.spec.parameters.vpcConfig.region
         clusterNameSelector.matchControllerRef = True
     }
     spec.providerConfigRef = oxr.spec.providerConfigRef
@@ -186,7 +186,7 @@ _items += [{
     kind = "RouteTableAssociation"
     metadata = _metadata(_zone.name, "routeTableAssociation" + _zone.name, "")
     spec.forProvider: {
-        region = oxr.spec.parameters.region
+        region = oxr.spec.parameters.vpcConfig.region
         routeTableIdSelector.matchControllerRef = True
         subnetIdSelector = {
             matchControllerRef = True
@@ -214,7 +214,7 @@ _items += [{
     }
     spec: {
         forProvider = {
-            region = oxr.spec.parameters.region
+            region = oxr.spec.parameters.vpcConfig.region
             availabilityZone = _zone.name
             cidrBlock = _zone.cidr
             vpcIdSelector.matchControllerRef = True
