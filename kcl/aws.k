@@ -83,6 +83,23 @@ _items = [{
         }
         providerConfigRef = oxr.spec.providerConfigRef
     }
+},  {
+    apiVersion = "aws.platform.upbound.io/v1alpha1"
+    kind = "XKarpenter"
+    metadata = _metadata("", "karpenter", "")
+    spec = {
+        parameters = {
+          clusterNameSelector = {
+            matchLabels = {
+              crossplane.io/composite = "configuration-aws-eks-karpenter"
+            }
+          }
+          # id = "configuration-aws-eks-karpenter"
+          id = oxr.spec.id
+          region = oxr.spec.parameters.vpcConfig.region.name
+        }
+        providerConfigRef = oxr.spec.providerConfigRef
+    }
 }, {
     apiVersion = "ec2.aws.upbound.io/v1beta1"
     kind = "VPC"
