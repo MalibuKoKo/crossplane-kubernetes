@@ -98,7 +98,7 @@ _items = [{
           id = oxr.spec.id
           region = oxr.spec.parameters.vpcConfig.region.name
         }
-        providerConfigRef = oxr.spec.providerConfigRef
+        providerConfigName = oxr.spec.providerConfigRef
     }
 }, {
     apiVersion = "ec2.aws.upbound.io/v1beta1"
