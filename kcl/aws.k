@@ -97,8 +97,8 @@ _items = [{
           # id = "configuration-aws-eks-karpenter"
           id = oxr.spec.id
           region = oxr.spec.parameters.vpcConfig.region.name
+          providerConfigName = oxr.spec.providerConfigRef
         }
-        providerConfigName = oxr.spec.providerConfigRef
     }
 }, {
     apiVersion = "ec2.aws.upbound.io/v1beta1"
