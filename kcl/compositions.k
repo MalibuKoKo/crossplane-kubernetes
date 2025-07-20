@@ -40,7 +40,7 @@ schema composition:
                 }
             }, {
                 step = "automatically-detect-ready-composed-resources"
-                functionRef.name = "crossplane-contrib-function-auto-ready"
+                functionRef.name = "upbound-function-auto-ready"
             }
         ]
         writeConnectionSecretsToNamespace = "crossplane-system"
