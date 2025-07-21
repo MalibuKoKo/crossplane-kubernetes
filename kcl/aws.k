@@ -22,6 +22,10 @@ _items = [{
     kind = "Cluster"
     metadata = _metadata("", "ekscluster", "")
     spec.forProvider: {
+        accessConfig: {
+          authenticationMode = "API_AND_CONFIG_MAP" # API, API_AND_CONFIG_MAP or CONFIG_MAP
+          bootstrapClusterCreatorAdminPermissions = True
+        }
         region = oxr.spec.parameters.vpcConfig.region.name
         bootstrapSelfManagedAddons = True
         if oxr.spec.parameters.version:
