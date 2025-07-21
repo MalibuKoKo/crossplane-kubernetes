@@ -91,7 +91,9 @@ _items = [{
         parameters = {
           clusterNameSelector = {
             matchLabels = {
-              "crossplane.io/composite" = oxr.spec.id
+              "crossplane.io/claim-name" = oxr.spec.id
+              "crossplane.io/claim-namespace" = oxr.spec.claimRef.namespace
+              # "crossplane.io/composite" = oxr.spec.id
             }
           }
           # id = "configuration-aws-eks-karpenter"
