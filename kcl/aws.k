@@ -91,7 +91,7 @@ _items = [{
         parameters = {
           clusterNameSelector = {
             matchLabels = {
-              "crossplane.io/composite" = "configuration-aws-eks-karpenter"
+              "crossplane.io/composite" = oxr.spec.id
             }
           }
           # id = "configuration-aws-eks-karpenter"
